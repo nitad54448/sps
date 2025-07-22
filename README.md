@@ -8,6 +8,7 @@ This document is a guide to the **SPS Experiment Designer & Analyzer** tool and 
 * **Part II: The Technical Reference** is for understanding the inner workings of the program. This section contains the specific function names, mathematical equations, and detailed statistical formulas for the analysis.
 
 ---
+---
 
 # Part I: The User's Guide
 ## Getting Started and Interpreting Results
@@ -17,17 +18,13 @@ This document is a guide to the **SPS Experiment Designer & Analyzer** tool and 
 
 The tool is designed to follow the natural workflow of a scientific experiment.
 
-1.  **Step 1: Design Your Experiment** 
-    You can start by adjusting labels about your process. What can you control? This is where you define your factors names and values (like Temperature and Pressure) and the safe operating range for each (their minimum and maximum values). You'll then choose an experimental "recipe" or design that best fits your goals. There are manu options possible, only a few are included here.
+1.  **Step 1: Design Your Experiment** You can start by adjusting labels about your process. What can you control? This is where you define your factors names and values (like Temperature and Pressure) and the safe operating range for each (their minimum and maximum values). You'll then choose an experimental "recipe" or design that best fits your goals. There are manu options possible, only a few are included here.
 
-2.  **Step 2: Generate the Experimental Plan** 
-    The tool will generate a experimental plan for you to follow. This isn't a random set of experiments; it's a scientifically chosen set of runs designed to give you the most information about your process with the least amount of work. For best results (or any results) the runs must be reproducibible. IF some parameters suggested by the program are not always achieved: let's say the program suggests 1000 °C but you measured at 980 °C: you can edit the value suggested by the program and put 980 °C. It may not be optimal as design of experiment value but it may be used in subsequent calculations.
+2.  **Step 2: Generate the Experimental Plan** The tool will generate a experimental plan for you to follow. This isn't a random set of experiments; it's a scientifically chosen set of runs designed to give you the most information about your process with the least amount of work. For best results (or any results) the runs must be reproducibible. IF some parameters suggested by the program are not always achieved: let's say the program suggests 1000 °C but you measured at 980 °C: you can edit the value suggested by the program and put 980 °C. It may not be optimal as design of experiment value but it may be used in subsequent calculations.
 
-3.  **Step 3: Run Your Experiments and then enter data** 
-    You need to perform the experiments exactly (or as much as possible) as laid out in the plan. Afterwards, you'll come back to the tool and enter your measured results (your "responses," like Yield and Compacity) into the data table. If you just want to try the tool, you can use the "Fill with Model Data" button to see how it works.
+3.  **Step 3: Run Your Experiments and then enter data** You need to perform the experiments exactly (or as much as possible) as laid out in the plan. Afterwards, you'll come back to the tool and enter your measured results (your "responses," like Yield and Compacity) into the data table. If you just want to try the tool, you can use the "Fill with Model Data" button to see how it works.
 
-4.  **Step 4: Analyze, Optimize, and Understand** 
-    The program analyzes your results and builds a mathematical model of your process if you fill (most of) the data table. It tells you how good that model is, which factors are most important, and predicts the best settings to achieve your goals. It also helps you find the perfect compromise when your are looking for two goals (if they are not completely divergent).
+4.  **Step 4: Analyze, Optimize, and Understand** The program analyzes your results and builds a mathematical model of your process if you fill (most of) the data table. It tells you how good that model is, which factors are most important, and predicts the best settings to achieve your goals. It also helps you find the perfect compromise when your are looking for two goals (if they are not completely divergent).
 
 5.  **Step 5: Visualize and Export Your Findings** 📄
     Finally, you can explore your results with 2D contour plots to "see" how the factors affect the reaction outcome. When you're ready, you can export a PDF report of the analysis.
@@ -143,14 +140,37 @@ Where $\mathbf{b}$ is the vector of estimated coefficients, $\mathbf{X}$ is the 
 
 ### **8. Detailed Statistical Parameter Definitions**
 
+The following definitions use these terms:
+* $y_i$: The observed response for the i-th run.
+* $\hat{y}_i$: The model-predicted response for the i-th run.
+* $\bar{y}$: The mean of all observed responses.
+* $n$: The number of experimental runs with valid data.
+* $p$: The number of terms in the model (including the intercept).
+
+The fundamental **Sum of Squares** are calculated first:
+* **Total Sum of Squares ($SS_{Total}$)**: $\sum_{i=1}^{n} (y_i - \bar{y})^2$
+* **Sum of Squared Errors ($SS_{Error}$)**: $\sum_{i=1}^{n} (y_i - \hat{y}_i)^2$
+
+---
+
 * **R-Squared (R²)**: The coefficient of determination.
-* **Adjusted R-Squared (Adj R²)**: R-Squared adjusted for the number of terms in the model relative to the number of data points.
-* **Predicted R-Squared (Pred R²)**: Calculated from the PRESS statistic, it measures the model's predictive accuracy.
+    * Formula: $$R^2 = 1 - \frac{SS_{Error}}{SS_{Total}}$$
+* **Adjusted R-Squared (Adj R²)**: R-Squared adjusted for the number of terms in the model.
+    * Formula: $$R^2_{adj} = 1 - \left( \frac{SS_{Error}/(n-p)}{SS_{Total}/(n-1)} \right)$$
 * **PRESS (Predicted Residual Sum of Squares)**: A cross-validation statistic used to calculate Pred R².
-* **Adequate Precision**: A signal-to-noise ratio for the model. The tool requires this to be > 4.
-* **Standard Deviation (Std. Dev.)**: The square root of the residual mean square error.
+    * Formula: $$PRESS = \sum_{i=1}^{n} (y_i - \hat{y}_{i,(-i)})^2$$
+    Where $\hat{y}_{i,(-i)}$ is the prediction for point *i* from a model fitted without point *i*.
+* **Predicted R-Squared (Pred R²)**: Measures the model's predictive accuracy.
+    * Formula: $$R^2_{pred} = 1 - \frac{PRESS}{SS_{Total}}$$
+* **Standard Deviation (Std. Dev.)**: The square root of the Mean Square Error ($MS_{Error}$).
+    * Formula: $$S = \sqrt{MS_{Error}} = \sqrt{\frac{SS_{Error}}{n-p}}$$
 * **Coefficient of Variation (C.V. %)**: The standard deviation as a percentage of the response mean.
-* **95% Confidence Interval (CI)**: The interval calculated for each coefficient. If it contains zero, the term is not considered statistically significant at the $\alpha=0.05$ level.
+    * Formula: $$C.V.\% = \left( \frac{S}{\bar{y}} \right) \times 100$$
+* **Adequate Precision**: A signal-to-noise ratio for the model.
+    * Formula: $$Adeq. Precision = \frac{\max(\hat{y}) - \min(\hat{y})}{\sqrt{\frac{p \cdot S^2}{n}}}$$
+* **95% Confidence Interval (CI)**: The interval calculated for each coefficient. The tool approximates this using a t-value of 1.96.
+    * Formula: $$\beta_j \pm 1.96 \times SE(\beta_j)$$
+    Where $SE(\beta_j)$ is the standard error of the j-th coefficient.
 
 ### **9. Optimization Algorithms**
 
