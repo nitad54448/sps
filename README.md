@@ -3,9 +3,9 @@
 
 This document is a guide to the **SPS Experiment Designer & Analyzer** tool and it is split into two parts:
 
-* **Part I: The User's Guide** is for the regular. It will shwo how to use the tool, what the different options mean for your experiment, and how to interpret your results in a practical way.
+* **Part I: The User's Guide** will shwo how to use the tool, what the different options mean for your experiments, and how to interpret the results in a practical way.
 
-* **Part II: The Technical Reference** is for understanding the inner workings of the tool. This section contains the specific function names, mathematical equations, and detailed statistical formulas that power the analysis.
+* **Part II: The Technical Reference** is for understanding the inner workings of the program. This section contains the specific function names, mathematical equations, and detailed statistical formulas for the analysis.
 
 
 ---
@@ -20,16 +20,16 @@ This document is a guide to the **SPS Experiment Designer & Analyzer** tool and 
 The tool is designed to follow the natural workflow of a scientific experiment.
 
 1.  **Step 1: Design Your Experiment** 
-    You'll start by telling the tool about your process. What can you control? This is where you define your factors names and values (like Temperature and Pressure) and the safe operating range for each (their minimum and maximum values). You'll then choose an experimental "recipe" or design that best fits your goals.
+    You can start by adjusting labels about your process. What can you control? This is where you define your factors names and values (like Temperature and Pressure) and the safe operating range for each (their minimum and maximum values). You'll then choose an experimental "recipe" or design that best fits your goals. There are manu options possible, only a few are included here.
 
 2.  **Step 2: Generate the Experimental Plan** 
-    The tool will generate a experimental plan for you to follow. This isn't a random set of experiments; it's a scientifically chosen set of runs designed to give you the most information about your process with the least amount of work. For best results (or any results) the runs must be reproducibible. Some parameters suggested by the program are not always achieved: let's say the program suggests 1000 °C but you measured at 980 °C: you can edit the value suggested by the program and put 980 °C. It may not be optimal as design of experiment value but it may be used in susequent calculations.
+    The tool will generate a experimental plan for you to follow. This isn't a random set of experiments; it's a scientifically chosen set of runs designed to give you the most information about your process with the least amount of work. For best results (or any results) the runs must be reproducibible. IF some parameters suggested by the program are not always achieved: let's say the program suggests 1000 °C but you measured at 980 °C: you can edit the value suggested by the program and put 980 °C. It may not be optimal as design of experiment value but it may be used in subsequent calculations.
 
-3.  **Step 3: Run Your Experiments and Enter Data** 
-    This is where you go to the lab! You'll perform the experiments exactly (or as much as possible) as laid out in the plan. Afterwards, you'll come back to the tool and enter your measured results (your "responses," like Yield and Compacity) into the data table. If you just want to try the tool, you can use the "Fill with Model Data" button to see how it works.
+3.  **Step 3: Run Your Experiments and then enter data** 
+    You need to perform the experiments exactly (or as much as possible) as laid out in the plan. Afterwards, you'll come back to the tool and enter your measured results (your "responses," like Yield and Compacity) into the data table. If you just want to try the tool, you can use the "Fill with Model Data" button to see how it works.
 
 4.  **Step 4: Analyze, Optimize, and Understand** 
-    The program analyzes your results and builds a mathematical model of your process if you fill the data table. It tells you how good that model is, which factors are most important, and predicts the absolute best settings to achieve your goals. It also helps you find the perfect compromise when your are looking for two goals (if they are not completely divergent).
+    The program analyzes your results and builds a mathematical model of your process if you fill (most of) the data table. It tells you how good that model is, which factors are most important, and predicts the best settings to achieve your goals. It also helps you find the perfect compromise when your are looking for two goals (if they are not completely divergent).
 
 5.  **Step 5: Visualize and Export Your Findings** 📄
     Finally, you can explore your results with 2D contour plots to "see" how the factors affect the reaction outcome. When you're ready, you can export a PDF report of the analysis.
