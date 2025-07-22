@@ -7,8 +7,6 @@ This document is a guide to the **SPS Experiment Designer & Analyzer** tool and 
 
 * **Part II: The Technical Reference** is for understanding the inner workings of the program. This section contains the specific function names, mathematical equations, and detailed statistical formulas for the analysis.
 
-
----
 ---
 
 # Part I: The User's Guide
